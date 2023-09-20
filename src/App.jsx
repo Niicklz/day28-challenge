@@ -7,7 +7,7 @@ export const App = () => {
 
 const [value, setValue] = useState("")
 const {status, info, getData} = useFetch({url: `https://api.github.com/users/${value}`, defaultVal: []})
-const [respository, setRespository] = useState([])
+const [repository, setRepository] = useState([])
 const changeValue = (e) => {
 setValue(e.target.value)
 
@@ -19,7 +19,7 @@ const searchUser = async(e)=> {
     getData()
    
     const lastRepos = await  getRespository(`https://api.github.com/users/${value}/repos?per_page=4&order=desc&sort=created_at`)
-    setRespository(lastRepos)
+    setRepository(lastRepos)
     
     setValue("")
     
@@ -49,7 +49,7 @@ const searchUser = async(e)=> {
             <p className="repos">{info.public_repos} <span>Repos</span></p>
           </div>
           <div className="lastest-projects-container">
-            {respository.map(repo => (
+            {repository.length > 0 && repository.map(repo => (
                 <a
                 key={repo.name}
                 href="#"
